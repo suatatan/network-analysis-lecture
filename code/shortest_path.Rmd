@@ -32,4 +32,16 @@ networka = read_csv("../data/01.csv")
 grapha   = graph_from_data_frame(networka)
 plot(grapha, vertex.label.cex=0.8, edge.arrow.size=.1,, vertex.color="cyan")
 ```
+```{r}
+average.path.length(grapha)
+```
+```{r}
+degree(grapha)
+mean(degree(grapha))
+average.path.length(grapha)
+
+degree(graphb)
+mean(degree(graphb))
+average.path.length(graphb)
+```
 

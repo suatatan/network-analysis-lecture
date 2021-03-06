@@ -1,0 +1,44 @@
+---
+title: "closeness"
+author: "Dr. Suat ATAN"
+date: "06 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+df = read.csv("../data/04.csv")
+df
+```
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(igraph)
+graph_object = graph_from_data_frame(df,directed = FALSE)
+graph_object
+```
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+plot(graph_object)
+```
+```{r}
+#convert results to data frame
+clocen = data.frame(closeness(graph_object,normalized = TRUE))
+#change colunm name
+colnames(clocen) = c('clo')
+# getting node names
+clocen['node'] = rownames(clocen)
+clocen
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+clocen %>% arrange(desc(clo))
+```
+
