@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 ```{r message=FALSE, warning=FALSE}
 library(igraph)
 library(readr)
-setwd("/home/suat/Belgeler/github/network-analysis-lecture")
-df <- readr::read_csv("data/02.csv")
+df <- readr::read_csv("../data/02.csv")
 g <- graph_from_data_frame(df)
 layout <- layout.fruchterman.reingold(g)
 # Plotting with configuration
@@ -49,6 +48,50 @@ ddist
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
 ggplot(ddist, aes(x=reorder(x,y), y=y)) + 
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+
+
+```{r message=FALSE, warning=TRUE}
+eu = read_table2("../data/ia-email-EU.mtx")
+eu
+```
+
+```{r}
+geu <- graph_from_data_frame(eu)
+layout <- layout.fruchterman.reingold(geu)
+# Plotting with configuration
+plot(geu, 
+     vertex.label=NA,
+     edge.arrow.size=.1, 
+     vertex.color="gold", 
+     vertex.size=.2,
+     vertex.frame.color="gray", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.8, 
+     vertex.label.dist=2, 
+     edge.curved=0,
+     layout=layout) 
+```
+
+
+# Degree distribution
+
+```{r}
+library(dplyr)
+deg <- degree(geu)
+x = names(deg)
+y = deg
+ddist = data.frame(x,y)
+ddist %>% arrange(desc(y))
+```
+# Plotting degree distribution
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+x <- ddist %>% top_n(100)
+ggplot(x, aes(x=reorder(x,y), y=y)) + 
   geom_bar(stat = "identity") +
   coord_flip()
 ```

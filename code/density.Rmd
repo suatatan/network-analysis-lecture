@@ -1,0 +1,58 @@
+---
+title: "density"
+author: "Dr. Suat ATAN"
+date: "01 03 2021"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+```{r}
+#define function
+draw_my_graph<-function(graph_object){
+  layout <- layout.fruchterman.reingold(graph_object)
+  # Plotting with configuration
+  plot(graph_object,
+     edge.arrow.size=.1, 
+     vertex.color="gold", 
+     vertex.size=.2,
+     vertex.frame.color="gray", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.8, 
+     vertex.label.dist=2, 
+     edge.curved=0,
+     layout=layout)
+}
+```
+
+
+# Import and Visualize
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+library(readr)
+network1 <- readr::read_csv("../data/01.csv")
+network2 <- readr::read_csv("../data/03.csv")
+g1 <- graph_from_data_frame(network1)
+g2 <- graph_from_data_frame(network2)
+
+# Plotting with configuration
+par(mfrow=c(1,2)) # two graph in the same plot
+draw_my_graph(g1)
+draw_my_graph(g2)
+```
+
+
+
+# Compute Density of Both Network
+
+```{r}
+edge_density(g1)
+edge_density(g2)
+```
+

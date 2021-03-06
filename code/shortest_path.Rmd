@@ -1,0 +1,35 @@
+---
+title: "shortest path"
+author: "Dr. Suat ATAN"
+date: "01 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Shortest Path
+
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(igraph)
+networkb = read_csv("../data/02.csv")
+graphb   = graph_from_data_frame(networkb)
+plot(graphb, vertex.label.cex=0.8, vertex.color="yellow")
+```
+```{r}
+shortest.paths(graphb)
+```
+
+```{r}
+average.path.length(graphb)
+```
+# Second Network
+
+```{r}
+networka = read_csv("../data/01.csv")
+grapha   = graph_from_data_frame(networka)
+plot(grapha, vertex.label.cex=0.8, edge.arrow.size=.1,, vertex.color="cyan")
+```
+
