@@ -1,0 +1,95 @@
+---
+title: "betweenness"
+author: "Dr. Suat ATAN"
+date: "07 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+df = read.csv("../data/05.csv")
+df
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(igraph)
+g = graph_from_data_frame(df,directed = FALSE)
+plot(g,vertex.color="white", vertex.size=0.2)
+```
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+g = graph_from_data_frame(df,directed = FALSE)
+estimate_betweenness(g,cutoff = -1)
+```
+## Network Repository Data > Citation
+
+cit-DBLP
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+df2 = read.csv("../data/cit-DBLP.edges",sep = "")
+g2 = graph_from_data_frame(df2,directed = FALSE)
+x = estimate_betweenness(g2,cutoff = -1)
+y = as.data.frame(x)
+y$nodes = names(x)
+y
+```
+
+```{r}
+plot(g2,vertex.label.cex=0.6,vertex.size=0.2)
+```
+
+
+```{r}
+library(dplyr)
+y %>% arrange(desc(x))
+```
+
+## Scenarios
+
+### Scenario 1
+
+```{r}
+library(igraph)
+scenario1 = graph_from_literal(A--B,B--C)
+plot(scenario1,vertex.color="white",vertex.size=0.3)
+```
+```{r}
+estimate_betweenness(scenario1,cutoff=-1)
+```
+
+
+
+### Scenario 2
+
+```{r}
+library(igraph)
+scenario2 = graph_from_literal(A--B,B--C,A--D,D--C)
+plot(scenario2,vertex.color="white",vertex.size=0.3)
+```
+```{r}
+estimate_betweenness(scenario2,cutoff=-1)
+```
+
+### Scenario 3
+
+```{r}
+library(igraph)
+scenario3 = graph_from_literal(A--B,B--C,B--D,B--E,B--F)
+plot(scenario3,vertex.color="white",vertex.size=0.3)
+```
+```{r}
+estimate_betweenness(scenario3,cutoff=-1)
+```
+
+## Degree Centrality Comparison
+
+```{r}
+degree(scenario1)
+degree(scenario2)
+degree(scenario3)
+```
+

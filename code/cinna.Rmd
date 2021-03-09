@@ -1,0 +1,112 @@
+---
+title: "cinna"
+author: "Dr. Suat ATAN"
+date: "07 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#install.packages("CINNA")
+```
+
+```{r}
+df = read.csv("../data/02.csv")
+df
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+g <- graph_from_data_frame(df)
+```
+
+# Finding Proper Centralies
+
+```{r message=FALSE, warning=FALSE}
+library(CINNA)
+proper_centralities(g)
+```
+# Calculating centralities all
+
+```{r}
+calcen = calculate_centralities(g)
+calcen
+```
+
+
+# Visualize Graph by Centrality
+
+```{r}
+visualize_graph(
+  g,
+  computed_centrality_value = NULL,
+  centrality.type = "Degree Centrality"
+)
+```
+
+
+```{r}
+ctypes <- proper_centralities(g)
+
+ctypes <- head(ctypes,3)
+
+draw_centrality_graph<-function(graph_object,ctype){
+   visualize_graph(
+   graph_object,
+   computed_centrality_value = NULL,
+   centrality.type = ctype
+   )
+  title(ctype,cex.main=2,col.main="orange")
+}
+
+for(ctype in ctypes){
+ tryCatch({
+      draw_centrality_graph(g,ctype)
+    },
+    error=function(cond){
+      message("----------Error----------")
+      message(cond)
+      return(NULL)
+  })
+}
+```
+# Zachary Karate Club
+
+```{r}
+library(CINNA)
+
+data("zachary")
+
+plot(zachary)
+
+
+```
+```{r}
+calcen_zachary = calculate_centralities(zachary)
+pca_centralities(calcen_zachary)
+```
+
+
+
+```{r}
+visualize_graph(
+  zachary,
+  computed_centrality_value = NULL,
+  centrality.type = "Katz Centrality (Katz Status Index)"
+)
+```
+```{r}
+calcen_zachary$`Katz Centrality (Katz Status Index)`
+```
+
+```{r}
+calcen_zachary$`Degree Centrality`
+```
+
+```{r}
+visualize_correlations(calcen_zachary[1:4])
+```
+

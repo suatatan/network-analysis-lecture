@@ -1,0 +1,20 @@
+---
+title: "eigenvector"
+author: "Dr. Suat ATAN"
+date: "07 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+df <- read.csv("../data/02.csv")
+g <- graph_from_data_frame(df,directed = FALSE)
+plot(g)
+```
+```{r}
+data.frame(eigen_centrality(g))[1]
+```
+
