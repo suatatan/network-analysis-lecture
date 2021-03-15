@@ -109,4 +109,7 @@ calcen_zachary$`Degree Centrality`
 ```{r}
 visualize_correlations(calcen_zachary[1:4])
 ```
+```{r}
+tsne_centralities(calcen_zachary)
+```
 

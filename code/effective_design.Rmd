@@ -1,0 +1,174 @@
+---
+title: "effective_design"
+author: "Dr. Suat ATAN"
+date: "14 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warnig=FALSE, message=FALSE}
+library(igraph)
+g <- igraph::barabasi.game(n=100)
+plot(g)
+```
+```{r warnig=FALSE, message=FALSE}
+library(igraph)
+g <- igraph::barabasi.game(n=100)
+layout <- layout.auto(g)
+# Plotting with configuration
+plot(g, 
+     edge.arrow.size=.5, 
+     vertex.color="white", 
+     vertex.size=4,
+     vertex.frame.color="red", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.5, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+## Decomposing
+
+Let's see the clusters
+
+```{r}
+clusters(g)
+```
+
+We cannot make clusters because everything are the connected. However, we can remove the central node to breaking network into pieces.
+
+Let's find the central node by the degree centrality
+
+```{r}
+V(g)[degree(g) == max(degree(g))]
+```
+Nr 1 is the node that has max connection.
+
+
+
+```{r}
+g = delete_vertices(g,"1")
+```
+
+```{r}
+layout <- layout.auto(g)
+# Plotting with configuration
+plot(g, 
+     edge.arrow.size=.5, 
+     vertex.color="white", 
+     vertex.size=4,
+     vertex.frame.color="red", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.5, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+## Dethroning
+
+```{r}
+Isolated = which(degree(g)==0) 
+g_post_king = delete.vertices(g, Isolated)
+```
+
+
+
+```{r}
+layout <- layout.auto(g_post_king)
+# Plotting with configuration
+plot(g_post_king, 
+     edge.arrow.size=.5, 
+     vertex.color="white", 
+     vertex.size=4,
+     vertex.frame.color="red", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.5, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+
+## Node color
+
+```{r}
+G = igraph::erdos.renyi.game(n=20, p.or.m = 1/5)
+plot(G)
+```
+```{r}
+plot(G,vertex.color="red")
+plot(G,vertex.color="grey80")
+plot(G,vertex.color=rgb(0,40,0,maxColorValue=255))
+```
+```{r}
+G <- random.graph.game(n=123,p.or.m = 1/8)
+plot(G)
+```
+```{r}
+G <- random.graph.game(n=123,p.or.m = 1/8)
+plot(G, vertex.color=rgb(0,0,1,.2))
+```
+# Necromancers Organization
+
+Read nodes and edges seperatedly
+```{r}
+nodes <- read.csv("../data/nodes_necromancers.csv")
+edges <- read.csv("../data/edges_necromancers.csv")
+role_colors <- read.csv("../data/role_colors_necromancers.csv")
+```
+
+
+```{r}
+ng <- graph_from_data_frame(edges, directed = FALSE)
+layout <- layout.fruchterman.reingold(ng)
+plot(ng, 
+     edge.arrow.size=.5, 
+     vertex.color="white", 
+     vertex.size=4,
+     vertex.frame.color="blue", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.9, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+```{r}
+node_count = length(V(ng))
+node_count
+```
+
+
+```{r}
+library(dplyr)
+for(i in 1:node_count ){
+        node_name = vertex_attr(ng,"name",i)
+        # role from data frame by name
+        nodes %>% filter(person ==node_name) %>% select("role") ->node_role
+        person_role = as.character(node_role$role)
+        vertex_attr(ng,"role",i) = person_role
+        # color from data frame by role
+        role_colors %>% filter(role == person_role) %>% select("color") ->color
+        color = as.character(color$color)
+        vertex_attr(ng,"color",i) = color
+}
+```
+
+
+```{r}
+vertex.attributes(ng)
+```
+```{r}
+layout <- layout.auto(ng)
+plot(ng, 
+     edge.arrow.size=.5, 
+     vertex.size=6,
+     vertex.frame.color="black", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.9, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+

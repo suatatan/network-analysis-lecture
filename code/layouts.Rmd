@@ -1,0 +1,58 @@
+---
+title: "layouts"
+author: "Dr. Suat ATAN"
+date: "13 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+df = read.csv("../data/02.csv")
+g = graph_from_data_frame(df) 
+```
+
+```{r}
+plot(g,layout=layout_randomly(g))
+```
+```{r}
+plot(g,layout=layout.fruchterman.reingold(g))
+```
+
+```{r}
+g2 <- graph_from_data_frame(read.csv("../data/03.csv"))
+plot(g2,layout=layout.random(g2))
+plot(g2,layout=layout.fruchterman.reingold(g2))
+```
+# Other Layout Styles
+
+```{r}
+plot(g,layout=layout.circle(g),vertex.color="yellow")
+plot(g,layout=layout_as_star(g),vertex.color="white")
+```
+```{r }
+plot(g2,layout=layout.circle(g2),vertex.color="yellow")
+plot(g2,layout=layout_as_star(g2),vertex.color="white")
+```
+```{r}
+plot(g,layout=layout.davidson.harel(g),vertex.color="green")
+plot(g,layout=layout.drl(g),vertex.color="cyan")
+```
+```{r}
+plot(g2,layout=layout.davidson.harel(g2),vertex.color="green")
+plot(g2,layout=layout.drl(g2),vertex.color="cyan")
+```
+# Grid Like
+```{r}
+plot(g,layout=layout.grid(g))
+plot(g2,layout=layout.grid(g2))
+```
+
+```{r}
+plot(g,layout=layout.auto(g))
+```
+
