@@ -1,0 +1,76 @@
+---
+title: "subgroups"
+author: "Dr. Suat ATAN"
+date: "05 04 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+g <- graph_from_literal(A---B,B---C,A---D,A---E,B--E,E---D,D---F)
+plot(g)
+```
+
+# Cliques
+```{r}
+cliques(g)
+```
+
+# Cliques for complex network
+
+```{r}
+df2 <- read.csv("../data/02.csv")
+g2 <- graph_from_data_frame(df2)
+plot(g2)
+
+```
+
+
+```{r}
+cliques(g2,min=3)
+```
+
+# K-Core
+
+```{r}
+coreness(g)
+```
+# Colorize K-Core
+
+```{r}
+g <- set_vertex_attr(g,"core",index= V(g),coreness(g))
+```
+
+
+```{r}
+V(g)$core
+```
+```{r}
+V(g)$color = ifelse(V(g)$core ==1,"red","green")
+```
+
+```{r}
+plot(g)
+```
+
+# K-Core For Complex Network
+
+```{r}
+df2 <- read.csv("../data/02.csv")
+g2 <- graph_from_data_frame(df2)
+plot(g2)
+```
+
+
+
+```{r}
+g2 <- set_vertex_attr(g2,"core",index= V(g2),coreness(g2))
+V(g2)$color = ifelse(V(g2)$core ==1,"red","green")
+plot(g2)
+```
+
+
