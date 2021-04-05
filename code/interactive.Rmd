@@ -1,0 +1,26 @@
+---
+title: "interactive"
+author: "Dr. Suat ATAN"
+date: "20 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(intergraph)
+library(igraph)
+data(Bali)
+iBali <- asIgraph(Bali)
+Coord <- tkplot(iBali, vertex.size=3,
+vertex.label=V(iBali)$role,
+vertex.color="darkgreen")
+# Edit plot in Tk graphics window before
+# running next two commands.
+MCoords <- tkplot.getcoords(Coord)
+plot(iBali, layout=MCoords, vertex.size=5,
+vertex.label=NA, vertex.color="lightblue")
+```
+

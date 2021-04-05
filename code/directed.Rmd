@@ -1,0 +1,36 @@
+---
+title: "directed"
+author: "Dr. Suat ATAN"
+date: "20 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Directed vs. Undirected
+
+```{r message=FALSE, warning=FALSE}
+df = read.csv("../data/02.csv")
+df
+```
+
+```{r}
+plot(graph_from_data_frame(df,directed=FALSE))
+```
+```{r}
+plot(graph_from_data_frame(df,directed=TRUE))
+```
+# Betweenness centrality for directed networks
+
+```{r}
+g <- graph_from_data_frame(df,directed=FALSE)
+gd <- graph_from_data_frame(df,directed=TRUE)
+```
+
+```{r}
+betweenness.estimate(g,cutoff = -1)
+betweenness.estimate(gd,cutoff = -1)
+```
+

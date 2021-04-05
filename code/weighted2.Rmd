@@ -1,0 +1,60 @@
+---
+title: "weighted"
+author: "Dr. Suat ATAN"
+date: "19 03 2021"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE}
+df = read.csv("../data/weighted2.csv")
+df
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+G = graph.data.frame(df,directed = FALSE)
+G <- set_edge_attr(G, "weight", value= df$amount)
+
+```
+
+
+```{r}
+is_weighted(G)
+```
+```{r}
+E(G)$weight
+```
+
+
+
+```{r}
+plot(G)
+```
+```{r}
+layout <- layout.fruchterman.reingold(G)
+plot(G, 
+     edge.label=E(G)$weight,
+     edge.label.cex=0.6,
+     edge.arrow.size=.5, 
+     vertex.size=3,
+     vertex.frame.color="black", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.9, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout) 
+```
+```{r}
+layout <- layout.auto(G)
+plot(G, 
+     edge.arrow.size=.5, 
+     vertex.size=6,
+     vertex.frame.color="black", 
+     vertex.label.color="black", 
+     vertex.label.cex=0.9, 
+     vertex.label.dist=1.2, 
+     edge.curved=0,
+     layout=layout)
+E(G)$width <- log10(E(G)$weight)
+```
+

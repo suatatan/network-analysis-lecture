@@ -1,0 +1,26 @@
+---
+title: "bipartite"
+author: "Dr. Suat ATAN"
+date: "20 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+edgelist <- read.table(text="Person    Event
+                         Amy       football
+                         Bob       picnic
+                         Sam       artshow", 
+                   header=TRUE)
+igraph <- graph.data.frame(edgelist)
+
+V(igraph)$type <- V(igraph)$name %in% edgelist[,1]
+plot(igraph)
+```
+```{r}
+plot(igraph,layout=layout.bipartite(igraph))
+```
+

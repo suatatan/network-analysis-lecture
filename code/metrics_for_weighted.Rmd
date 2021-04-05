@@ -1,0 +1,43 @@
+---
+title: "metrics_for_weighted"
+author: "Dr. Suat ATAN"
+date: "20 03 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+df = read.csv("../data/weighted.csv")
+df
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+#without weight
+g = graph.data.frame(df,directed = FALSE)
+degree(g)
+
+```
+```{r}
+#setting weights
+g = graph.data.frame(df,directed = FALSE)
+gw<- set_edge_attr(g, "weight", value= df$amount)
+graph.strength(gw)
+```
+# Comparision of power with and without weights
+
+```{r}
+library(dplyr)
+data.frame(degree(g)) %>% arrange(desc(`degree.g.`))
+```
+
+```{r}
+library(dplyr)
+data.frame(graph.strength(gw)) %>% arrange(desc(`graph.strength.gw.`))
+```
+
+

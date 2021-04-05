@@ -1,0 +1,37 @@
+---
+title: "weighted"
+author: "Dr. Suat ATAN"
+date: "19 03 2021"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE}
+df = read.csv("../data/weighted.csv")
+df
+```
+
+```{r message=FALSE, warning=FALSE}
+library(igraph)
+G = graph.data.frame(df,directed = FALSE)
+G <- set_edge_attr(G, "weight", value= df$amount)
+
+```
+
+
+```{r}
+is_weighted(G)
+```
+
+
+
+```{r}
+plot(G)
+```
+```{r}
+plot(G,edge.label=E(G)$weight)
+```
+```{r}
+E(G)$width <- E(G)$weight
+plot(G)
+```
+
