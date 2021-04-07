@@ -89,7 +89,8 @@ q6
 **Report your answers**
 
 Run code below and copy the result and paste it into e-mail with e-mail
-with subject of ‘MIDHASH’ and send it to your instructor
+with subject of ‘MIDHASH’ and send it to your instructor. And attach
+your .Rmd file within.
 
 ``` r
 answer_set <- c(q1,q2,q3,q4,q5,q6)
