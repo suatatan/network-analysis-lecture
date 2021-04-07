@@ -1,0 +1,105 @@
+---
+title: "ADS-516 Network Analysis Midterm Coding Exercise"
+author: "Dr. Suat ATAN"
+date: "07 04 2021"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE, include = TRUE, echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+df <- read.csv("setyourname.csv")
+g <- graph_from_data_frame(df)
+```
+
+**Instructions:**
+
+-   Read all instruction carefullly.
+
+-   Assign each result into question name:
+
+-   Each answer will be in numeric format without digit
+
+-   If you cannot find answer set the value NA e.g: q1 = NA
+
+-   Last submission date: 21 April 2021
+
+-   Late submission date: 28 April 2021 (5 point will be removed from overall score)
+
+**Point scale:**
+
++-------------+--------------------------------------------------------+
+| Question    | Point                                                  |
++=============+========================================================+
+| 1           | 10                                                     |
++-------------+--------------------------------------------------------+
+| 2           | 20                                                     |
++-------------+--------------------------------------------------------+
+| 3           | 20                                                     |
++-------------+--------------------------------------------------------+
+| 4           | 20                                                     |
++-------------+--------------------------------------------------------+
+| 5           | 20                                                     |
++-------------+--------------------------------------------------------+
+| 6           | 10                                                     |
++-------------+--------------------------------------------------------+
+
+: Point Scale
+
+**Questions**
+
+Q1: Compute max degree centrality
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+q1 <- YOURCODE
+q1
+```
+
+Q2: Compute average degree centrality (without decimal)
+
+```{r}
+q2 <- YOURCODE
+q2
+```
+
+Q3: Compute density and multiple it with 1000 and round (digits parameter should be zero)
+
+```{r}
+q3a <- YOURCODE
+q3 = round(q3a*1000,digits = 0)
+q3
+```
+
+Q4: Compute the average path length across network and round it with zero digit.
+
+```{r}
+q4a <- YOURCODE
+q4 <- round(q4a,digits = 0)
+q4
+```
+
+Q5: Compute the mininum Eigenvector centrality:
+
+```{r}
+q5<-YOURCODE
+q5
+```
+
+Q6: It is challenge question you need to think about. Question is: Filter
+
+```{r}
+q6a = YOURCODE
+q6 <- as.numeric(q6a)
+q6
+```
+
+**Report your answers**
+
+Run code below and copy the result and paste it into e-mail with e-mail with subject of 'MIDHASH' and send it to your instructor
+
+```{r}
+answer_set <- c(q1,q2,q3,q4,q5,q6)
+answer_set
+```
