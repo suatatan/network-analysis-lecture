@@ -77,8 +77,8 @@ q5<-YOURCODE
 q5
 ```
 
-Q6: It is challenge question you need to think about. Question is:
-Filter
+Q6: It is challenge question you need to think about. 
+Find the node or nodes that have maximum degree centrality. The number you will get is numeric id of the node. 
 
 ``` r
 q6a = YOURCODE
