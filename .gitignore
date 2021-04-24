@@ -2,6 +2,10 @@
 .Rhistory
 .Rapp.history
 
+# Cevap Kağıtlarını engelle
+
+exams/midterm_cevap_kagidi.Rmd
+
 # Session Data files
 .RData
 
