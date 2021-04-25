@@ -2,19 +2,39 @@
 title: "Week 8"
 author: "Dr. Suat ATAN"
 date: "25 04 2021"
-output: ioslides_presentation
-editor_options: 
-  markdown: 
+output:
+  ioslides_presentation:
+    incremental: yes
+    css: scrollable_slides.css
+  slidy_presentation:
+    incremental: yes
+editor_options:
+  markdown:
     wrap: 72
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Theory
+# Week 8
 
-## Idea
+## Plan
+
+- Affiliation Networks
+  - Visualization
+  - Projections
+  - Data Model
+- Cutpoints
+- Other Network Packages
+  - statnet
+  - network
+  - intergraph
+  - visNetwork
+  - networkD3
+
+
+## Theory
 
 A tribe is a group of people connected to one another, connected to a
 leader, and connected to an idea. For millions of years, human beings
@@ -226,3 +246,99 @@ Source:
 **Disadvantage:**
 
 -   They can be unwieldy when used to depict larger affiliation networks
+
+# CutPoints and Bridges
+
+## Cutpoint
+
+-   A node that, if dropped, would increase the number of components in
+    the network.
+
+-   If they were dropped, that would result in two subsets of actors
+    that would not be able to communicate with each other
+
+## Cutpoint Example
+
+Who is cutpoint(s)?
+
+```{r}
+library(igraph)
+g_mod_a <- graph_from_data_frame(read.csv("../data/modular-a.csv"),directed = F)
+plot(g_mod_a)
+
+```
+
+## Conversion between Network Packages
+
+Igraph does not has cutpoint function therefore we are converting it by
+`intergraph` package.
+
+```{r message=FALSE, warning=FALSE}
+library(statnet) #for cutpoints function # it employs network package.
+library(igraph)
+library(intergraph)
+g_mod_a_network = asNetwork(g_mod_a) # convert to network type compatible with statnet
+```
+
+## Finding Cutpoints
+
+```{r}
+cp <- cutpoints(g_mod_a_network,mode="graph",return.indicator = TRUE)
+cp
+```
+
+## Accessing the vertex names by Network Package
+
+```{r}
+g_mod_a_network %v% "vertex.names"
+```
+
+5 and 7 are cutpoints Can and Zamyotov.
+
+## VizNetwork
+
+```{r message=FALSE, warning=FALSE}
+library(visNetwork)
+visNetwork::visIgraph(g_mod_a)
+```
+
+## Network3d
+
+```{r}
+# Load package
+library(networkD3)
+
+# Create fake data
+src <- c("A", "A", "A", "A",
+        "B", "B", "C", "C", "D")
+target <- c("B", "C", "D", "J",
+            "E", "F", "G", "H", "I")
+networkData <- data.frame(src, target)
+
+# Plot
+simpleNetwork(networkData)
+```
+
+## Sankey Networks with NetworkD3
+
+```{r}
+# Load energy projection data
+URL <- paste0(
+        "https://cdn.rawgit.com/christophergandrud/networkD3/",
+        "master/JSONdata/energy.json")
+Energy <- jsonlite::fromJSON(URL)
+# Plot
+sankeyNetwork(Links = Energy$links, Nodes = Energy$nodes, Source = "source",
+             Target = "target", Value = "value", NodeID = "name",
+             units = "TWh", fontSize = 12, nodeWidth = 30)
+```
+
+## Dendograms with Network3D
+
+```{r}
+hc <- hclust(dist(USArrests), "ave")
+
+dendroNetwork(hc, height = 600)
+```
+
+## The End
