@@ -1,0 +1,53 @@
+---
+title: "Workshop-1"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Warm-up for R
+
+# Define Variables 
+```{r}
+textual_variable="croatia"
+numeric_variable=3.14
+list_of_variables = c(1,3,5)
+```
+
+# Conditions
+
+```{r}
+another_value = 5
+another_value == 33
+```
+
+```{r}
+another_value = 5
+if(another_value == numeric_variable){
+  print("Values are equal")
+}else{
+  print("Values are different")
+}
+```
+
+# Comparison operator
+
+```{r}
+another_value != numeric_variable
+another_value > numeric_variable
+another_value < numeric_variable
+
+```
+
+# Loops
+```{r}
+list_of_variables = c(1,3,5)
+for(i in list_of_variables){
+  print(i)
+}
+```
+

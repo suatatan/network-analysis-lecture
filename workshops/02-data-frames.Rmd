@@ -1,0 +1,94 @@
+---
+title: "02-Data Frame"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Let's define two column as list
+
+```{r}
+ages = c(25,33,45,13)
+weights = c(88,67,90,60)
+```
+
+# Data Frames 
+
+```{r}
+data.frame(ages,weights)
+```
+
+# Define as variable
+```{r}
+our_tiny_excel_like_data = data.frame(ages,weights)
+```
+
+
+# Why
+
+## Filterable
+
+```{r}
+our_tiny_excel_like_data$ages>20
+```
+
+## Show filtered result
+
+
+```{r}
+our_tiny_excel_like_data[our_tiny_excel_like_data['ages']>20]
+```
+
+
+```{r}
+subset(our_tiny_excel_like_data,ages>20)
+```
+
+## Computable
+
+### Sum
+```{r}
+sum(our_tiny_excel_like_data$ages)
+```
+
+### Mean
+
+```{r}
+mean(our_tiny_excel_like_data$ages)
+```
+
+## Standard Deviation
+
+```{r}
+sd(our_tiny_excel_like_data$ages)
+```
+
+## Visualizable
+
+**One Variable**
+```{r}
+plot(our_tiny_excel_like_data$ages)
+```
+
+**Two Variable**
+```{r}
+plot(our_tiny_excel_like_data$ages, our_tiny_excel_like_data$weights)
+```
+
+## Exportable
+
+### To CSV
+```{r}
+write.csv(our_tiny_excel_like_data,"output/our_tiny_excel_like_data.csv")
+```
+
+### To Excel
+
+```{r}
+# library(xlsx)
+```
+

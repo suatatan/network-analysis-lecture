@@ -1,0 +1,64 @@
+---
+title: "05-dealing-with-different-type-of-datum"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# NetworkRepo
+
+https://networkrepository.com/inf-USAir97.php
+
+Visualize inf-USAir97's link
+
+- First of all, review the raw file before the input
+
+```{r}
+df = read.csv("input/bn-cat-mixed-species_brain_1.edges")
+df
+```
+
+Nothing happened why?
+
+# Set seperator
+```{r}
+
+df = read.csv("input/bn-cat-mixed-species_brain_1.edges", sep = " ")
+df
+```
+
+# Set column names
+
+```{r}
+colnames(df) = c("from","to")
+```
+
+
+# Graph Conversion
+```{r}
+MY_GRAPH_OBJECT = graph_from_data_frame(df)
+```
+
+
+# Visualize
+
+
+```{r}
+
+layout <- layout.davidson.harel(MY_GRAPH_OBJECT) #try to change
+plot(MY_GRAPH_OBJECT, 
+     edge.arrow.size=.1, 
+     vertex.color="black", 
+     vertex.size=15,
+     vertex.frame.color="gray",  
+     vertex.label.color="green", 
+     vertex.label.cex=1, 
+     vertex.label.dist=2, # change
+     edge.curved=0,
+     layout=layout) 
+```

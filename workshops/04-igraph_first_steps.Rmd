@@ -1,0 +1,57 @@
+---
+title: "03-import_data_from_outside"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Import Dataset Manually
+
+```{r}
+df = read.csv("input/simple_network.csv")
+df
+```
+
+# Simple Visualization
+
+```{r warning=FALSE}
+# install.packages("igraph")
+library(igraph)
+```
+
+
+```{r}
+graph_object = graph_from_data_frame(df)
+graph_object
+```
+
+```{r}
+plot(graph_object)
+```
+
+# Selecting Layout
+
+```{r}
+layout <- layout.fruchterman.reingold(graph_object)
+```
+
+
+# Visualizations by properties
+
+```{r}
+plot(graph_object, 
+     edge.arrow.size=.1, 
+     vertex.color="blue", 
+     vertex.size=15,
+     vertex.frame.color="gray",  
+     vertex.label.color="black", 
+     vertex.label.cex=0.5, 
+     vertex.label.dist=2, # change
+     edge.curved=0,
+     layout=layout) 
+```
+

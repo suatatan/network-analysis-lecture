@@ -1,0 +1,25 @@
+---
+title: "03-import_data_from_outside"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Import Dataset by RStudio
+
+```{r}
+# Use Right panel
+```
+
+
+# Import Dataset Manually
+
+```{r}
+df = read.csv("input/ages_and_weights.csv")
+df
+```
+
