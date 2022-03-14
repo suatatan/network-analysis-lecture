@@ -41,6 +41,7 @@ colnames(df) = c("from","to")
 
 # Graph Conversion
 ```{r}
+library(igraph)
 MY_GRAPH_OBJECT = graph_from_data_frame(df)
 ```
 
@@ -50,7 +51,7 @@ MY_GRAPH_OBJECT = graph_from_data_frame(df)
 
 ```{r}
 
-layout <- layout.davidson.harel(MY_GRAPH_OBJECT) #try to change
+layout <- layout.kamada.kawai(MY_GRAPH_OBJECT) #try to change
 plot(MY_GRAPH_OBJECT, 
      edge.arrow.size=.1, 
      vertex.color="black", 
