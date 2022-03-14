@@ -1,0 +1,63 @@
+---
+title: "01-level-01"
+author: "Suat ATAN"
+date: "14 Mart 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Define your name as variable
+
+```{r}
+myname = ""
+```
+
+
+# Define 5 Numeric Variables
+
+```{r}
+
+```
+
+# Convert them as list
+
+```{r}
+
+```
+
+# Get sum of this list
+
+```{r}
+
+```
+
+# Import a nework data file
+
+```{r}
+
+```
+
+# Visualize simply
+
+```{r}
+
+```
+
+
+# Visualize with 3 different layout
+
+```{r}
+
+```
+
+# Select nice one and plot with your name
+
+```{r}
+
+```
+
+
+
