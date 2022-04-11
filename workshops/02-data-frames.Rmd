@@ -16,6 +16,11 @@ ages = c(25,33,45,13)
 weights = c(88,67,90,60)
 ```
 
+```{r}
+class(ages)
+```
+
+
 # Data Frames 
 
 ```{r}
@@ -27,25 +32,29 @@ data.frame(ages,weights)
 our_tiny_excel_like_data = data.frame(ages,weights)
 ```
 
+```{r}
+class(our_tiny_excel_like_data)
+```
+
 
 # Why
 
 ## Filterable
 
 ```{r}
-our_tiny_excel_like_data$ages>20
+our_tiny_excel_like_data$weights > 70
 ```
 
 ## Show filtered result
 
 
 ```{r}
-our_tiny_excel_like_data[our_tiny_excel_like_data['ages']>20]
+our_tiny_excel_like_data[our_tiny_excel_like_data['ages'] > 30]
 ```
 
 
 ```{r}
-subset(our_tiny_excel_like_data,ages>20)
+subset(our_tiny_excel_like_data, ages< 30)
 ```
 
 ## Computable
@@ -71,7 +80,7 @@ sd(our_tiny_excel_like_data$ages)
 
 **One Variable**
 ```{r}
-plot(our_tiny_excel_like_data$ages)
+plot(our_tiny_excel_like_data$weights,type = "h")
 ```
 
 **Two Variable**

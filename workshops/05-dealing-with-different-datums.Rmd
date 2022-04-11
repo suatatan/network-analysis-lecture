@@ -51,14 +51,14 @@ MY_GRAPH_OBJECT = graph_from_data_frame(df)
 
 ```{r}
 
-layout <- layout.kamada.kawai(MY_GRAPH_OBJECT) #try to change
+layout <- layout.fruchterman.reingold(MY_GRAPH_OBJECT) #try to change
 plot(MY_GRAPH_OBJECT, 
      edge.arrow.size=.1, 
      vertex.color="black", 
      vertex.size=15,
      vertex.frame.color="gray",  
      vertex.label.color="green", 
-     vertex.label.cex=1, 
+     vertex.label.cex=0, 
      vertex.label.dist=2, # change
      edge.curved=0,
      layout=layout) 

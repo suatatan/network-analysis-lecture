@@ -14,6 +14,12 @@ library(igraph)
 g <- igraph::barabasi.game(n=100)
 plot(g)
 ```
+
+
+
+
+
+
 ```{r warnig=FALSE, message=FALSE}
 library(igraph)
 g <- igraph::barabasi.game(n=100)
@@ -50,7 +56,7 @@ Nr 1 is the node that has max connection.
 
 
 ```{r}
-g = delete_vertices(g,"1")
+g = delete_vertices(g,"4")
 ```
 
 ```{r}

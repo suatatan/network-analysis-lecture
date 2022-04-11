@@ -37,10 +37,11 @@ plot(g,
 # Calculating Degree Distribution
 
 ```{r}
+library(igraph)
 deg <- degree(g)
-x = names(deg)
-y = deg
-ddist = data.frame(x,y)
+names = names(deg)
+degree_score = deg
+ddist = data.frame(names,degree_score)
 ddist
 ```
 
@@ -90,7 +91,7 @@ ddist %>% arrange(desc(y))
 # Plotting degree distribution
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
-x <- ddist %>% top_n(100)
+x <- ddist %>% head(5)
 ggplot(x, aes(x=reorder(x,y), y=y)) + 
   geom_bar(stat = "identity") +
   coord_flip()

@@ -37,7 +37,7 @@ draw_my_graph<-function(graph_object){
 library(igraph)
 library(readr)
 network1 <- readr::read_csv("../data/01.csv")
-network2 <- readr::read_csv("../data/03.csv")
+network2 <- readr::read_csv("../data/02.csv")
 g1 <- graph_from_data_frame(network1)
 g2 <- graph_from_data_frame(network2)
 

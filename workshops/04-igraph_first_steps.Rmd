@@ -19,15 +19,19 @@ df
 # Simple Visualization
 
 ```{r warning=FALSE}
-# install.packages("igraph")
-library(igraph)
+# library(igraph)
 ```
 
 
 ```{r}
-graph_object = graph_from_data_frame(df)
+graph_object = graph_from_data_frame(df, directed = FALSE)
 graph_object
 ```
+
+```{r}
+df
+```
+
 
 ```{r}
 plot(graph_object)
@@ -37,22 +41,24 @@ title("Here a trick:)")
 # Selecting Layout
 
 ```{r}
-layout <- layout.fruchterman.reingold(graph_object)
+
+class(layout)
 ```
 
 
 # Visualizations by properties
 
 ```{r}
-plot(graph_object, 
-     edge.arrow.size=.1, 
-     vertex.color="blue", 
-     vertex.size=15,
+layout <- layout.circle(graph_object)
+plot(graph_object,
+     edge.arrow.size= .1, 
+     vertex.color="green", 
+     vertex.size=7,
      vertex.frame.color="gray",  
      vertex.label.color="black", 
-     vertex.label.cex=0.5, 
+     vertex.label.cex=0.7, 
      vertex.label.dist=2, # change
-     edge.curved=0,
+     edge.curved=.6,
      layout=layout) 
 ```
 
